@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+:root {
+    --bgColor: #333;
+    --textPrimary: #fff;
+    --textSecondary: #666;
+    --primaryColor: #fd4;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    width: 600px;
+    margin: 50px auto;
+    font-size: 1.4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+header svg {
+    width: 40px;
+    fill: var(--primaryColor);
+}
+
+header h1 {
+    color: var(--primaryColor);
+}
+
+#game-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 6px 30px;
+}
+
+#game-top-buttons {
+    
+}
+
+#game-top-info {
+    color: var(--primaryColor);
+}
+
+.button {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    border: 0;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div#game {
+    line-height: 35px;
+    height: 105px;
+    overflow: hidden;
+    position: relative;
+}
+
+div#game:focus {
+    outline: none;
+}
+
+div#game:focus #words {
+    filter: blur(0);
+}
+
+#words {
+    filter: blur(3px);
+    color: var(--textSecondary)
+}
+
+#words .word {
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0 5px;
+}
+
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 35px;
+}
+
+div#game:focus #focus-error {
+    display: none;
+}
+
+.letter.correct {
+    color: #fff;
+}
+
+.letter.incorrect {
+    color: #f55;
+}
+
+#cursor {
+    display: none;
+    width: 2px;
+    height: 1.6rem;
+    background-color: var(--primaryColor);
+    position: absolute;
+    animation: blink .5s infinite;
+}
+
+div#game:focus #cursor {
+    display: block;
+}
+
+@keyframes blink {
+    0% { opacity: 1;}
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
