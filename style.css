@@ -6,10 +6,10 @@
 }
 
 :root {
-    --bgColor: #333;
-    --textPrimary: #fff;
-    --textSecondary: #666;
-    --primaryColor: #fd4;
+    --bgColor: #faf7f2;
+    --textPrimary: #8B4B00;
+    --textSecondary: #aaa;
+    --primaryColor: #a67c52;
 }
 
 body {
@@ -46,41 +46,73 @@ header h1 {
     margin: 20px 6px 30px;
 }
 
-#game-top-buttons {
-    
-}
 
 #game-top-info {
     color: var(--primaryColor);
 }
 
 .button {
-    background: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.5);
+    background: #E2DCD1;
+    color: #312E29;
     border: 0;
-    padding: 5px 20px;
-    border-radius: 5px;
+    padding: 10px 30px;
+    border-radius: 20px;
     cursor: pointer;
+}
+
+#game-bottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 div#game {
     line-height: 35px;
-    height: 105px;
+    height: 110px;
     overflow: hidden;
     position: relative;
+    filter: blur(3px);
 }
 
-div#game:focus {
-    outline: none;
+.game-area {
+    background-color: #F6F0E6;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
-div#game:focus #words {
-    filter: blur(0);
+#game svg {
+    width: 120px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0.15;
+    fill: var(--primaryColor);
+    transform: rotate(15deg);
 }
+
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 75px;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+
+.game-area:focus { outline: none; }
+.game-area:focus div#game { filter: blur(0); }
+.game-area:focus #focus-error {
+    display: none;
+}
+.game-area:focus #cursor { display: block; }
 
 #words {
-    filter: blur(3px);
-    color: var(--textSecondary)
+    color: var(--textSecondary);
+    opacity: 0.7;
 }
 
 #words .word {
@@ -89,19 +121,9 @@ div#game:focus #words {
     margin: 0 5px;
 }
 
-#focus-error {
-    position: absolute;
-    inset: 0;
-    text-align: center;
-    padding-top: 35px;
-}
-
-div#game:focus #focus-error {
-    display: none;
-}
-
 .letter.correct {
-    color: #fff;
+    color: var(--primaryColor);
+    font-weight: bold;
 }
 
 .letter.incorrect {
@@ -117,9 +139,7 @@ div#game:focus #focus-error {
     animation: blink .5s infinite;
 }
 
-div#game:focus #cursor {
-    display: block;
-}
+
 
 @keyframes blink {
     0% { opacity: 1;}

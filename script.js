@@ -1,6 +1,7 @@
 let words = [];
 
 const GAME_TIME = 30 * 1000;
+
 window.timer = null;
 window.gameStartTime = null;
 
@@ -85,7 +86,7 @@ function gameOver() {
         words = ['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'lazy', 'dog', 'keyboard', 'typing', 'speed', 'test'];
     }
 
-    document.getElementById('game').addEventListener('keyup', (ev) => {
+    document.querySelector('.game-area').addEventListener('keyup', (ev) => {
         const key = ev.key;
 
         const currentLetter = document.querySelector('.letter.current');
