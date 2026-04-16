@@ -77,7 +77,7 @@ function gameOver() {
 
 (async () => {
     try {
-        words = await fetch('/words.txt')
+        words = await fetch('./words.txt')
             .then(response => response.text())
             .then(data => data.split('\r\n').filter(w => w.trim()))
     } catch (error) {
