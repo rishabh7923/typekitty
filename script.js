@@ -76,9 +76,14 @@ function gameOver() {
 }
 
 (async () => {
-    words = await fetch('public/words.txt')
-        .then(response => response.text())
-        .then(data => data.split('\r\n'))
+    try {
+        words = await fetch('/words.txt')
+            .then(response => response.text())
+            .then(data => data.split('\r\n').filter(w => w.trim()))
+    } catch (error) {
+        console.error('Failed to load words:', error);
+        words = ['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'lazy', 'dog', 'keyboard', 'typing', 'speed', 'test'];
+    }
 
 
     document.getElementById('game').addEventListener('keyup', (ev) => {
