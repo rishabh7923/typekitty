@@ -161,9 +161,13 @@ function gameOver() {
             }
 
             if (!currentLetter) {
-                addClass(currentWord.lastChild, 'current');
-                removeClass(currentWord.lastChild, 'correct');
-                removeClass(currentWord.lastChild, 'incorrect');
+                if (currentWord.lastChild?.classList.contains('extra')) {
+                    currentWord.removeChild(currentWord.lastChild);
+                } else if (currentWord.lastChild) {
+                    addClass(currentWord.lastChild, 'current');
+                    removeClass(currentWord.lastChild, 'correct');
+                    removeClass(currentWord.lastChild, 'incorrect');
+                }
             }
         }
         
