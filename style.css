@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&family=Josefin+Sans&display=swap');
 
 * {
     padding: 0px;
@@ -16,8 +16,6 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--bgColor);
     color: var(--textPrimary);
-    width: 600px;
-    margin: 50px auto;
     font-size: 1.4rem;
 
     display: flex;
@@ -28,17 +26,55 @@ body {
 header {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 5px;
+
+    font-family: "Josefin Sans", sans-serif;
+
+    padding: 10px;
+    font-weight: 800;
+}
+
+header h1 { color: var(--primaryColor); }
+
+main {
+  width: 600px;
+  margin: 50px auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.gametop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 10px;
 }
 
-header svg {
-    width: 40px;
-    fill: var(--primaryColor);
+.chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #E2DCD1;
+    padding: 30px 50px;
+    border-radius: 50px;
 }
 
-header h1 {
-    color: var(--primaryColor);
+.chip-label {
+    font-size: 10px;
+    color: #5E5B54;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
 }
+
+.chip-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+
 
 #game-top {
     display: flex;
@@ -83,12 +119,13 @@ div#game {
     overflow: hidden;
 }
 
-#game svg {
-    width: 120px;
+#game i {
+    font-size: 100px;
+
     position: absolute;
     right: 0;
     bottom: 0;
-    opacity: 0.15;
+    opacity: 0.05;
     fill: var(--primaryColor);
     transform: rotate(15deg);
 }
@@ -105,15 +142,10 @@ div#game {
 
 .game-area:focus { outline: none; }
 .game-area:focus div#game { filter: blur(0); }
-.game-area:focus #focus-error {
-    display: none;
-}
+.game-area:focus #focus-error { display: none; }
 .game-area:focus #cursor { display: block; }
 
-#words {
-    color: var(--textSecondary);
-    opacity: 0.7;
-}
+#words { color: var(--textSecondary); }
 
 #words .word {
     display: inline-block;
@@ -139,7 +171,9 @@ div#game {
     animation: blink .5s infinite;
 }
 
+#game.over {
 
+}
 
 @keyframes blink {
     0% { opacity: 1;}

@@ -42,6 +42,12 @@ function updateCursorPosition() {
     cursor.style.left = (currentLetter ? targetRect.left : targetRect.right) - gameRect.left + 'px';
 }
 
+function playSound() {
+    const sound = document.getElementById("typeSound");
+    sound.currentTime = 0;
+    sound.play();
+}
+
 function newGame() {
     document.getElementById('words').innerHTML = '';
 
@@ -54,7 +60,7 @@ function newGame() {
     addClass(document.querySelector('.letter'), 'current')
     removeClass(document.getElementById('game'), 'over')
 
-    document.getElementById('game-top-info').innerHTML = (GAME_TIME / 1000) + '';
+    // document.getElementById('game-top-info').innerHTML = (GAME_TIME / 1000) + '';
     updateCursorPosition();
     window.timer = null;
 }
@@ -70,10 +76,17 @@ function getWPM() {
     return correctedWords.length / GAME_TIME * 60000;
 }
 
+function getAccuracy() {
+    const correctLetters = document.querySelectorAll('.word .correct').length;
+    const incorrectLetters = document.querySelectorAll('.word .incorrect:not(.extra)').length;
+
+    return Math.round(correctLetters / (correctLetters + incorrectLetters) * 100);
+}
+
 function gameOver() {
     clearInterval(window.timer);
     addClass(document.getElementById('game'), 'over');
-    document.getElementById('game-top-info').innerHTML = `WPM: ${getWPM()}`
+    document.getElementById('wpm').innerHTML = getWPM();
 }
 
 (async () => {
@@ -99,9 +112,11 @@ function gameOver() {
         const isBackspace = key === 'Backspace'
         const isFirstLetter = currentWord.firstChild === currentLetter;
 
+
         if (document.querySelector('#game.over')) return;
 
         console.log({ key, expected })
+
 
         if (!window.timer && isLetter) {
             window.timer = setInterval(() => {
@@ -110,7 +125,9 @@ function gameOver() {
 
                 if (timeLeft <= 0) return gameOver();
 
-                document.getElementById('game-top-info').innerHTML = timeLeft
+                document.getElementById('wpm').innerHTML = getWPM();
+                document.getElementById('accuracy').innerHTML = `${getAccuracy()}%`;
+                // document.getElementById('wpm').innerHTML = timeLeft
             }, 1000)
         }
 
@@ -146,6 +163,8 @@ function gameOver() {
 
         if (isBackspace) {
             if (currentLetter && isFirstLetter) {
+                if (!currentWord.previousSibling) return;
+
                 removeClass(currentWord, 'current');
                 addClass(currentWord.previousSibling, 'current');
 
@@ -171,12 +190,13 @@ function gameOver() {
             }
         }
         
-        if (currentWord.getBoundingClientRect().top > 250) {
+        if (currentWord.getBoundingClientRect().top > 320) {
             const words = document.getElementById('words');
             const margin = parseInt(words.style.marginTop || '0px');
             words.style.marginTop = (margin - 35) + 'px';
         }
 
+        playSound();
         updateCursorPosition();
 
     })
