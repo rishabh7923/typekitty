@@ -1,17 +1,27 @@
 let words = [];
 
-const GAME_TIME = 30 * 1000;
+const GAME_TIME = 5 * 1000;
 
 window.timer = null;
 window.gameStartTime = null;
 
-
+/**
+ * 
+ * @param {Element} el 
+ * @param {string} name 
+ */
 function addClass(el, name) {
-    el.className += ' ' + name;
+    el.classList.add(name);
 }
 
+/**
+ * 
+ * @param {Element} el 
+ * @param {string} name 
+ */
 function removeClass(el, name) {
-    el.className = el.className.replace(name, '');
+    //remove all occurance even duplicates
+    el.classList.remove(name);
 }
 
 function randomWord() {
@@ -85,6 +95,7 @@ function getAccuracy() {
 
 function gameOver() {
     clearInterval(window.timer);
+    window.gameStartTime = null;
     addClass(document.getElementById('game'), 'over');
     document.getElementById('wpm').innerHTML = getWPM();
 }
@@ -198,7 +209,6 @@ function gameOver() {
 
         playSound();
         updateCursorPosition();
-
     })
 
     document.getElementById('new-game-button').addEventListener('click', () => {
